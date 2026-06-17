@@ -1,4 +1,4 @@
--- maior lucro
+-- maior lucro..
 SELECT 
     p.nome AS produto, 
     cat.nome AS categoria, 

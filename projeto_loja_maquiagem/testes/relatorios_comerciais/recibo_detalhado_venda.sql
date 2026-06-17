@@ -1,5 +1,4 @@
--- recibo venda
--- para escolher outras vendas, basta alterar o valor do where para o id_venda desejado
+-- recibo venda 1
 SELECT 
     v.id_venda, 
     c.nome AS cliente, 

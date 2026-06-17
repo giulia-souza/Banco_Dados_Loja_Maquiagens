@@ -14,6 +14,13 @@ CREATE TABLE Clientes(
 	email VARCHAR(100) UNIQUE NOT NULL,
 	telefone VARCHAR(20)
 );
+-- cria a tabela de Fornecedores (ind)
+CREATE TABLE Fornecedores (
+    id_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
+    razao_social VARCHAR(150) NOT NULL,
+    cnpj VARCHAR(20) UNIQUE NOT NULL,
+    telefone VARCHAR(20)
+);
 -- cria a tabela de Produtos (depende de Categorias)
 CREATE TABLE Produtos(
 	id_produto INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,6 +39,14 @@ CREATE TABLE Vendas(
 	valor_total DECIMAL(10, 2) DEFAULT 0.00,
 	FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente)
 );
+-- cria a tabela de Pedidos de Compra (depende de Fornecedores)
+CREATE TABLE Pedidos_Compra (
+    id_pedido_compra INT AUTO_INCREMENT PRIMARY KEY,
+    id_fornecedor INT NOT NULL,
+    data_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
+    valor_total_custo DECIMAL(10, 2) DEFAULT 0.00,
+    FOREIGN KEY (id_fornecedor) REFERENCES Fornecedores(id_fornecedor)
+);
 -- cria a tabela de Itens_Venda (depende de Vendas e Produtos)
 CREATE TABLE Itens_Venda(
 	id_item_venda INT AUTO_INCREMENT PRIMARY KEY,
@@ -41,21 +56,6 @@ CREATE TABLE Itens_Venda(
 	preco_unitario DECIMAL(10, 2) NOT NULL,
 	FOREIGN KEY (id_venda) REFERENCES Vendas(id_venda),
 	FOREIGN KEY (id_produto) REFERENCES Produtos(id_produto)
-);
--- cria a tabela de Fornecedores (ind)
-CREATE TABLE Fornecedores (
-    id_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
-    razao_social VARCHAR(150) NOT NULL,
-    cnpj VARCHAR(20) UNIQUE NOT NULL,
-    telefone VARCHAR(20)
-);
--- cria a tabela de Pedidos de Compra (depende de Fornecedores)
-CREATE TABLE Pedidos_Compra (
-    id_pedido_compra INT AUTO_INCREMENT PRIMARY KEY,
-    id_fornecedor INT NOT NULL,
-    data_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
-    valor_total_custo DECIMAL(10, 2) DEFAULT 0.00,
-    FOREIGN KEY (id_fornecedor) REFERENCES Fornecedores(id_fornecedor)
 );
 -- cria a tabela de Itens do Pedido (depende de Pedidos_Compra e Produtos)
 CREATE TABLE Itens_Pedido_Compra (

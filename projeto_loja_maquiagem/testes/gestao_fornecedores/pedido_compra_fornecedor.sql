@@ -1,5 +1,4 @@
 -- recibo do fornecedor da compra 1
--- caso queira o recibo de outra compra, basta alterar o valor do where para o id_pedido_compra desejado
 SELECT 
     pc.id_pedido_compra, 
     f.razao_social AS fornecedor, 
